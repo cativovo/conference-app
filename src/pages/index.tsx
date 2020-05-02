@@ -14,8 +14,14 @@ const Home: NextPage<HomeProps, HomeProps> = ({ listTalks }) => {
   const [talks, setTalks] = useState(listTalks?.items);
   return (
     <div>
-      {!talks && <h1>no talks</h1>}
-      {talks && talks.map((talk) => talk && <Talk {...talk} key={talk.id} />)}
+      {(!Array.isArray(talks) || (talks && talks.length === 0)) && (
+        <h1 data-testid="no-talks">No Talks</h1>
+      )}
+      {talks && (
+        <div data-testid="talk-list">
+          {talks.map((talk) => talk && <Talk {...talk} key={talk.id} />)}
+        </div>
+      )}
     </div>
   );
 };
