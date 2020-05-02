@@ -8,9 +8,9 @@ type TalkProps = {
 
 const Talk: React.FC<TalkProps> = ({ speakerName, name, description }) => (
   <div>
-    <h3>{speakerName}</h3>
-    <h5>{name}</h5>
-    <p>{description}</p>
+    <h3 data-testid="speaker-name">{speakerName}</h3>
+    <h5 data-testid="name">{name}</h5>
+    <p data-testid="description">{description}</p>
   </div>
 );
 
