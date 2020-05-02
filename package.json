@@ -1,0 +1,28 @@
+{
+  "name": "aws-appsync-react-workshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^13.13.4",
+    "@types/uuid": "^7.0.3",
+    "aws-amplify": "^3.0.10",
+    "aws-appsync": "^3.0.3",
+    "next": "^9.3.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "typescript": "^3.8.3"
+  }
+}
