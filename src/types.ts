@@ -6,7 +6,7 @@ type BaseActionType<T> = {
 };
 
 // Talks
-export type Talk = Omit<Exclude<GetTalkQuery['getTalk'], null>, '__typename'>;
+export type Talk = Exclude<GetTalkQuery['getTalk'], null>;
 
 type SetTalksActionType = BaseActionType<'SET_TALKS'> & {
   payload: {
@@ -20,9 +20,15 @@ type SetInputActionType = BaseActionType<'SET_INPUT'> & {
   };
 };
 type ClearInputActionType = BaseActionType<'CLEAR_INPUT'>;
+type ToggleLoadingActionType = BaseActionType<'TOGGLE_LOADING'>;
 
 export type SetTalks = (talks: Talk[]) => SetTalksActionType;
 export type SetInput = (key: string, value: string) => SetInputActionType;
 export type ClearInput = () => ClearInputActionType;
+export type ToggleLoading = () => ToggleLoadingActionType;
 
-export type UseTalksActionTypes = SetTalksActionType | SetInputActionType | ClearInputActionType;
+export type UseTalksActionTypes =
+  | SetTalksActionType
+  | SetInputActionType
+  | ClearInputActionType
+  | ToggleLoadingActionType;
