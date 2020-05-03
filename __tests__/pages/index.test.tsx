@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 import Home from '../../src/pages/index';
 import { API } from '../../src/utils';
 
@@ -25,22 +25,7 @@ const listTalksItems = [
   },
 ];
 
-it('should return items with array of talks', async () => {
-  API.query.mockResolvedValue({
-    data: {
-      listTalks: {
-        items: listTalksItems,
-      },
-    },
-  });
-  const props = await Home.getInitialProps();
-
-  expect(props).toBeTruthy();
-  expect(Array.isArray(props.listTalks.items)).toBeTruthy();
-  expect(props.listTalks.items[0]).toMatchObject(listTalksItems[0]);
-});
-
-it('should return item with null value', async () => {
+it('should render No Talks message', async () => {
   API.query.mockResolvedValue({
     data: {
       listTalks: {
@@ -48,25 +33,8 @@ it('should return item with null value', async () => {
       },
     },
   });
+  const { queryByTestId } = render(<Home />);
 
-  const props = await Home.getInitialProps();
-
-  expect(props).toBeTruthy();
-  expect(Array.isArray(props.listTalks.items)).toBeFalsy();
-});
-
-it('should render no talks', async () => {
-  API.query.mockResolvedValue({
-    data: {
-      listTalks: {
-        items: null,
-      },
-    },
-  });
-
-  const props = await Home.getInitialProps();
-
-  const { queryByTestId } = render(<Home {...props} />);
   const noTalks = queryByTestId('no-talks');
 
   expect(noTalks).toBeTruthy();
@@ -74,28 +42,6 @@ it('should render no talks', async () => {
   expect(noTalks?.textContent).toBe('No Talks');
 
   const talkList = queryByTestId('talk-list');
+
   expect(talkList).toBeFalsy();
-});
-
-it('should render talk list', async () => {
-  API.query.mockResolvedValue({
-    data: {
-      listTalks: {
-        items: listTalksItems,
-      },
-    },
-  });
-
-  const props = await Home.getInitialProps();
-
-  const { queryByTestId, container } = render(<Home {...props} />);
-  const noTalks = queryByTestId('no-talks');
-
-  expect(noTalks).toBeFalsy();
-
-  const talkList = queryByTestId('talk-list');
-
-  expect(talkList).toBeTruthy();
-  expect(talkList?.tagName).toBe('DIV');
-  expect(talkList?.children.length).toBe(2);
 });
