@@ -4,12 +4,12 @@ import React, { useEffect } from 'react';
 import { ListTalksQuery } from '../API';
 import Talk from '../components/Talk';
 import { listTalks as ListTalks } from '../graphql/queries';
-import { setTalks, useTalks, toggleLoading } from '../hooks';
+import { setTalks, useTalks, toggleLoading, setInput } from '../hooks';
 import { Talk as TTalk } from '../types';
 import { API } from '../utils';
 
 const Home: NextPage = () => {
-  const [{ talks, isLoading }, dispatch] = useTalks();
+  const [{ talks, isLoading, name }, dispatch] = useTalks();
 
   const getTalks = async () => {
     const { data } = await API.query<ListTalksQuery>({
@@ -26,9 +26,15 @@ const Home: NextPage = () => {
     getTalks();
   }, []);
 
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    dispatch(setInput(name, value));
+  };
+
   if (typeof window !== 'undefined') {
     return (
       <div>
+        <input name="name" onChange={handleInputChange} value={name} />
         {isLoading && <h1 data-testid="loading">Loading...</h1>}
         {talks.length === 0 && !isLoading && <h1 data-testid="no-talks">No Talks</h1>}
         {talks.length > 0 && (
