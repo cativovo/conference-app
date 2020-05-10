@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <div>
+    <h3
+      data-testid="speaker-name"
+    >
+      This is a test speaker name
+    </h3>
+    <h5
+      data-testid="name"
+    >
+      this is atest name
+    </h5>
+    <p
+      data-testid="description"
+    >
+      This is a test description
+    </p>
+  </div>
+</div>
+`;

@@ -27,4 +27,6 @@ it('should render correctly', () => {
   expect(description).toBeTruthy();
   expect(description?.tagName).toBe('P');
   expect(description?.textContent).toBe(props.description);
+
+  expect(container).toMatchSnapshot();
 });
